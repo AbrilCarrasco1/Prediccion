@@ -28,9 +28,14 @@ def user_input_features():
 
 df = user_input_features()
 prediccion=0
-datos =  pd.read_csv('Scores_df.csv', encoding='latin-1')
-X = datos.drop(columns='exam_score')
-y = datos['exam_score']
+datos = pd.read_csv('Scores_df.csv', encoding='latin-1')
+
+X = datos.drop(columns='exam_score').apply(pd.to_numeric, errors='coerce')
+y = pd.to_numeric(datos['exam_score'], errors='coerce')
+datos_limpios = pd.concat([X, y], axis=1).dropna()
+X = datos_limpios.drop(columns='exam_score')
+y = datos_limpios['exam_score']
+
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
