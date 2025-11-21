@@ -28,7 +28,7 @@ def user_input_features():
 
 df = user_input_features()
 prediccion=0
-datos =  pd.read_csv('Scores_df (1).csv', encoding='latin-1')
+datos =  pd.read_csv('Scores_df.csv', encoding='latin-1')
 X = datos.drop(columns='exam_score')
 y = datos['exam_score']
 
